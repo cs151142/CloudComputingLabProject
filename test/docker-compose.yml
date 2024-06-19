@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  ruby:
+    build:
+      context: .
+      dockerfile: Dockerfile.ruby
+    container_name: ruby-container
+    volumes:
+      - ruby-data:/usr/src/app
+    working_dir: /usr/src/app
+    tty: true
+
+  vscode:
+    build:
+      context: .
+      dockerfile: Dockerfile.vscode
+    container_name: vscode-container
+    ports:
+      - "8080:8080"
+    volumes:
+      - ruby-data:/home/coder/project
+    working_dir: /home/coder/project
+
+volumes:
+  ruby-data:
+
