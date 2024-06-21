@@ -1,0 +1,16 @@
+# Dockerfile for VS Code Server
+FROM codercom/code-server:latest
+
+# Switch to root user
+USER root
+
+# Specify a volume where the project will be
+VOLUME /home/workspace
+
+# Set the working directory
+WORKDIR /home/workspace
+# Expose the port for accessing the code server
+EXPOSE 8080
+
+# Default command
+CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "none", "./workspace"]
