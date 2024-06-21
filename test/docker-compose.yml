@@ -9,6 +9,7 @@ services:
     volumes:
       - ruby-data:/usr/src/app
     working_dir: /usr/src/app
+    stdin_open: true
     tty: true
 
   vscode:
