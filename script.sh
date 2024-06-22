@@ -1,11 +1,13 @@
 #!/bin/bash
 function usage {
     echo "usage:            [ --build             ]
+                  [ --start             ]    
                   [ --attach            ]
                   [ --exec path/file.rb ]
                   [ --stop              ]
                   [ --help              ]"
-    echo "  --build     Build Dockerfiles and run containers"
+    echo "  --build     Build Containers"
+    echo "  --start     Start Containers"
     echo "  --attach    Attach on running container and manually run ruby files"
     echo "  --exec      Execute ruby file. \"Example:\" \"./script.sh --exec hello.rb\""
     echo "  --stop      Stop running containers"
@@ -27,9 +29,13 @@ function getStatus {
 case $1 in
 
   --build)
-    docker-compose up --detach --build
-    echo "Vscode container running on http://localhost:8080/"
+    docker-compose build
     ;;
+
+  --start)
+  docker-compose up --detach 
+  echo "Vscode container running on http://localhost:8080/"
+  ;;
 
   --attach)
     docker attach ruby-container
