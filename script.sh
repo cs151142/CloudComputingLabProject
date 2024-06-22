@@ -13,6 +13,16 @@ function usage {
     exit 1
 }
 
+function getStatus {
+  default="not running"
+  var1=$(docker inspect -f '{{.State.Status}}' ruby-container)
+  var2=$(docker inspect -f '{{.State.Status}}' vscode-container)
+  status_ruby="${var1:=default}" # If var1 not set or null, set it's value to 'default'.
+  status_vscode="${var2:=default}"
+  echo "ruby-container    status: $status_ruby"
+  echo "vscode-container  status: $status_vscode"
+}
+
 case $1 in
 
   --build)
@@ -34,10 +44,7 @@ case $1 in
     ;;
 
   --status)
-    status_ruby=$(docker inspect -f '{{.State.Status}}' ruby-container)
-    status_vscode=$(docker inspect -f '{{.State.Status}}' vscode-container)
-    echo "ruby-container    status: $status_ruby"
-    echo "vscode-container  status: $status_vscode"
+    getStatus
     ;;
 
   * | --help)
