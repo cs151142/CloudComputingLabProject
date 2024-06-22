@@ -13,6 +13,7 @@ function usage {
     exit 1
 }
 
+
 function getStatus {
   default="not running"
   var1=$(docker inspect -f '{{.State.Status}}' ruby-container)
