@@ -11,6 +11,7 @@ services:
     working_dir: /usr/src/app
     stdin_open: true
     tty: true
+    mem_limit: 512m
 
   vscode:
     build:
@@ -22,6 +23,7 @@ services:
     volumes:
       - ruby-data:/home/workspace
     working_dir: /home/workspace
+    mem_limit: 512m
 
 volumes:
   ruby-data:
